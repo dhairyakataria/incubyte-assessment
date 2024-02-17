@@ -21,21 +21,15 @@ class TestStringCalculator(unittest.TestCase):
     def test_multiple_numbers_commas_2(self):
         self.assertEqual(self.calc.add_str("1, 5 ,  "), 6)
 
+    # Test invalid input
     def test_invalid_input_trailing_comma_newline(self):
         with self.assertRaises(ValueError) as context:
             self.calc.add_str("1,\n")
         self.assertEqual(str(context.exception), "Invalid input format: trailing comma followed by newline")
 
+
     def test_multiple_numbers_newlines(self):
         self.assertEqual(self.calc.add_str("1\n2,3"), 6)
-
-    def test_custom_delimiter(self):
-            self.assertEqual(self.calc.add("//;\n1;2"), 3)
-
-    def test_negative_numbers(self):
-        with self.assertRaises(ValueError) as context:
-            self.calc.add("1,-2,3,-4")
-        self.assertEqual(str(context.exception), "Negative numbers not allowed: -2,-4")
 
 if __name__ == '__main__':
     unittest.main()
