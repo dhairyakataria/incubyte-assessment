@@ -28,5 +28,11 @@ class StringCalculator:
 
         # Convert numbers to integers and filter out empty strings
         numbers_list = [int(num) for num in split_numbers if num]
+
+        # Check for negative numbers
+        negative_numbers = [num for num in numbers_list if num < 0]
+        if negative_numbers:
+            raise ValueError("Negative numbers not allowed: " + ",".join(map(str, negative_numbers)))
+
         return sum(numbers_list)
     
