@@ -3,14 +3,24 @@ class StringCalculator:
         if not str_numbers:
             return 0
         
+        # Check for trailing comma followed by newline
+        if ",\n" in str_numbers:
+            raise ValueError("Invalid input format: trailing comma followed by newline")
+
+        # Strip leading and trailing whitespaces in str if any
+        str_numbers = str_numbers.strip()
+
         delimiter = ","
 
-        # Split the numbers using delimiter or newline
-        numbers_list = str_numbers.split(",")
-        
-        # Remove the extra white spaces before and after the number if any
-        numbers_list = [num.strip() for num in numbers_list]
-        
+        # Split numbers using delimiter and new line
+        split_numbers = []
+        for part in str_numbers.split(delimiter):
+            if "\n" in part:
+                split_numbers.extend(part.split("\n"))
+            else:
+                split_numbers.append(part)
+
         # Convert numbers to integers and filter out empty strings
-        numbers_list = [int(num) for num in numbers_list if num]
+        numbers_list = [int(num) for num in split_numbers if num]
         return sum(numbers_list)
+    
