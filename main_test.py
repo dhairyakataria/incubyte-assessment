@@ -27,9 +27,15 @@ class TestStringCalculator(unittest.TestCase):
             self.calc.add_str("1,\n")
         self.assertEqual(str(context.exception), "Invalid input format: trailing comma followed by newline")
 
-
+    # Test multiple numbers separated by newlines
     def test_multiple_numbers_newlines(self):
         self.assertEqual(self.calc.add_str("1\n2,3"), 6)
+
+    # Test custom delimiter
+    def test_custom_delimiter(self):
+            self.assertEqual(self.calc.add_str("//;\n4;5;7"), 16)
+
+    
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,7 +10,13 @@ class StringCalculator:
         # Strip leading and trailing whitespaces in str if any
         str_numbers = str_numbers.strip()
 
+        # Default delimiter
         delimiter = ","
+        
+        # Check for custom delimiter
+        if str_numbers.startswith("//"):
+            delimiter_line, str_numbers = str_numbers.split("\n", 1)
+            delimiter = delimiter_line[2:]
 
         # Split numbers using delimiter and new line
         split_numbers = []
